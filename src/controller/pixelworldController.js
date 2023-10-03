@@ -14,7 +14,7 @@ endpoints.get('/produtos', async (req, resp) => {
     };
 })
 
-endpoints.post('/produtos', async (req,resp) => {
+endpoints.post('/produto', async (req,resp) => {
     try {
         let produtos = req.body;
         let dados = await Cadastro(produtos);
