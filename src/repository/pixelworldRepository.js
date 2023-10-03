@@ -28,6 +28,41 @@ export async function Cadastro(produto){
     return produto;
 }
 
+export async function EditarProduto (id, produtos){
+
+    let sql = `update tb_produto set 
+    id_categoria = ?,
+    nm_marca = ?,
+    nm_produto = ?,
+    ds_estoque = ?,
+    nr_preco = ?,
+    nr_garantia = ?
+    where id_produto = ?`
+
+    let [info] = await conexao.query(sql, [
+
+        produtos.categoria,
+        produtos.marca,
+        produtos.produto,
+        produtos.estoque,
+        produtos.preco,
+        produtos.garantia,
+        id
+    ]);
+
+    let linha = info.affectedRows;
+    return linha;
+}
+
+export async function DeletarProduto(id){
+    let sql = `delete from tb_produto where id_produto = ?`
+
+    let [info] = await conexao.query(sql, [id])
+
+    let linha = info.affectedRows;
+    return linha;
+}
+
 
 
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { ListarProdutos } from "../repository/pixelworldRepository.js";
+import { Cadastro, DeletarProduto, EditarProduto, ListarProdutos } from "../repository/pixelworldRepository.js";
 
 const endpoints = Router();
 
@@ -17,7 +17,7 @@ endpoints.get('/produtos', async (req, resp) => {
 endpoints.post('/produtos', async (req,resp) => {
     try {
         let produtos = req.body;
-        let dados = await InserirProduto(produtos);
+        let dados = await Cadastro(produtos);
         resp.send(dados);
     } 
     catch (err) {
