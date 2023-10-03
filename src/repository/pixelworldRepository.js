@@ -1,6 +1,6 @@
 import conexao from "./connection.js";
 
-export async function ListarProdutos() {
+export async function Listar() {
     let sql = `select * from tb_produto
               inner join tb_categoria on tb_categoria.id_categoria = tb_produto.id_categoria`;
 
@@ -28,7 +28,7 @@ export async function Cadastro(produto){
     return produto;
 }
 
-export async function EditarProduto (id, produtos){
+export async function Editar (id, produtos){
 
     let sql = `update tb_produto set 
     id_categoria = ?,
@@ -54,12 +54,12 @@ export async function EditarProduto (id, produtos){
     return linha;
 }
 
-export async function DeletarProduto(id){
+export async function Deletar(id){
     let sql = `delete from tb_produto where id_produto = ?`
 
     let [info] = await conexao.query(sql, [id])
 
-    let linha = info.affectedRows;
+    let linha = info.affectedRow;
     return linha;
 }
 

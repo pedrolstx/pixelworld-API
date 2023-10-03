@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { Cadastro, DeletarProduto, EditarProduto, ListarProdutos } from "../repository/pixelworldRepository.js";
+import { Cadastro, Deletar, Editar, Listar } from "../repository/pixelworldRepository.js";
 
 const endpoints = Router();
 
-endpoints.get('/produtos', async (req, resp) => {
+endpoints.get('/listar', async (req, resp) => {
     try {
-        let dados = await ListarProdutos();
+        let dados = await Listar();
         resp.send(dados);
 
     } 
@@ -14,7 +14,7 @@ endpoints.get('/produtos', async (req, resp) => {
     };
 })
 
-endpoints.post('/produtos', async (req,resp) => {
+endpoints.post('/inserir', async (req,resp) => {
     try {
         let produtos = req.body;
         let dados = await Cadastro(produtos);
@@ -25,11 +25,11 @@ endpoints.post('/produtos', async (req,resp) => {
     }
 })
 
-endpoints.put('/alterarproduto:id', async (req,resp) =>{
+endpoints.put('/alterar/:id', async (req,resp) =>{
     try {
         let id = req.params.id;
-        let produtos = req.body;
-        let r = await EditarProduto(id, produtos);
+        let produto = req.body;
+        let r = await Editar(id, produto );
         resp.send();
 
     } catch (err) {
@@ -37,11 +37,10 @@ endpoints.put('/alterarproduto:id', async (req,resp) =>{
     }
 })
 
-endpoints.delete('/deletarproduto/:id', async (req,resp) =>{
+endpoints.delete('/deletar/:id', async (req,resp) =>{
     try {
         let id = req.params.id;
-        let produtos = req.body;
-        let r = await DeletarProduto(id, produtos);
+        let r = await Deletar(id);
         resp.send()
     } catch (err) {
         resp.status(500).send({ erro: 'Ocorreu um erro!'});
