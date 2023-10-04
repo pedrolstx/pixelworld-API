@@ -9,6 +9,12 @@ export async function Listar() {
     return resp
 }
 
+export async function Buscarcategorias(){
+    let comando = `select * from tb_categoria`
+    let [resp] = await conexao.query(comando)
+    return resp
+}
+
 export async function Cadastro(produto){
     let sql = `insert into tb_produto (id_categoria, nm_marca, nm_produto, ds_estoque, nr_preco, nr_garantia)
     values (?, ?, ?, ?, ?, ?)`

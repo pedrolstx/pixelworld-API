@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { Cadastro, Deletar, Editar, Listar } from "../repository/pixelworldRepository.js";
+import { Buscarcategorias, Cadastro, Deletar, Editar, Listar } from "../repository/pixelworldRepository.js";
 
 const endpoints = Router();
 
@@ -14,7 +14,20 @@ endpoints.get('/listar', async (req, resp) => {
     };
 })
 
-endpoints.post('/inserir', async (req,resp) => {
+endpoints.get('/listar/categoria', async (req, resp) => {
+    try{
+        let dados = await Buscarcategorias()
+        resp.send(dados);
+    }
+
+    catch (err) {
+        resp.status(500).send({ erro: 'Ocorreu um erro!'})
+    };
+
+
+})
+
+endpoints.post('/produto', async (req,resp) => {
     try {
         let produtos = req.body;
         let dados = await Cadastro(produtos);
