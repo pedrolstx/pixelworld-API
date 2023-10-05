@@ -60,4 +60,7 @@ endpoints.delete('/deletar/:id', async (req,resp) =>{
     }
 })
 
+
+
+
 export default endpoints;

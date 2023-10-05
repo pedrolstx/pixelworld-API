@@ -68,3 +68,4 @@ export async function Deletar(id){
     let linha = info.affectedRow;
     return linha;
 }
+
